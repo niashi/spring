@@ -19,8 +19,8 @@ import com.generation.microGameiros.model.Produto;
 import com.generation.microGameiros.repository.ProdutoRepository;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/produto")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 	
 	@Autowired

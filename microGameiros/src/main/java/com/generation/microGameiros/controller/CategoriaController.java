@@ -19,8 +19,8 @@ import com.generation.microGameiros.model.Categoria;
 import com.generation.microGameiros.repository.CategoriaRepository;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/categoria")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 	
 	@Autowired
