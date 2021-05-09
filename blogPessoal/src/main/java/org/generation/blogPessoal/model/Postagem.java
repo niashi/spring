@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "Postagens")
+@Table(name = "tb_postagens")
 public class Postagem {
 
 	@Id
@@ -24,11 +24,10 @@ public class Postagem {
 	private long id;
 	
 	@NotNull
-	@Size(min = 5, max = 100)
 	private String titulo;
 	
 	@NotNull
-	@Size(min = 10, max = 500)
+	@Size(min = 5, max = 500)
 	private String texto;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -37,10 +36,6 @@ public class Postagem {
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema ;
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
 
 	public long getId() {
 		return id;
@@ -73,8 +68,12 @@ public class Postagem {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	public Tema getTema() {
 		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 }
