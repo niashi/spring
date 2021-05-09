@@ -19,22 +19,26 @@ import com.generation.FarmaDrogao.model.Categoria;
 import com.generation.FarmaDrogao.repository.CategoriaRepository;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/categoria")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 	
 	@Autowired
 	private CategoriaRepository repository;
 	
 	@GetMapping
-	private ResponseEntity<List<Categoria>> getAll() {
+	public ResponseEntity<List<Categoria>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
-	@GetMapping("/descricao/{descricao}") 
+	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> GetById(@PathVariable long id) {
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/descricao/{descricao}") 
+	public ResponseEntity<List<Categoria>> GetByDescricao(@PathVariable String descricao) {
+		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
 	
 	@PostMapping
@@ -42,8 +46,8 @@ public class CategoriaController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
 	
-	@PutMapping ("/{id}")
-	public ResponseEntity<Categoria> put(@RequestBody Categoria categoria) {
+	@PutMapping
+	public ResponseEntity<Categoria> put (@RequestBody Categoria categoria) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
 	}
 	
